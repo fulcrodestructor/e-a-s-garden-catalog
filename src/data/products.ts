@@ -8,7 +8,10 @@ export interface Product {
   price: number;
   stock: number;
   image: string;
+  category: string;
 }
+
+export const categories = ["Plantas", "Árboles"];
 
 export const initialProducts: Product[] = [
   {
@@ -17,6 +20,7 @@ export const initialProducts: Product[] = [
     price: 150,
     stock: 12,
     image: crownOfThorns,
+    category: "Plantas",
   },
   {
     id: "2",
@@ -24,6 +28,7 @@ export const initialProducts: Product[] = [
     price: 80,
     stock: 25,
     image: cactus,
+    category: "Plantas",
   },
   {
     id: "3",
@@ -31,5 +36,6 @@ export const initialProducts: Product[] = [
     price: 60,
     stock: 30,
     image: succulent,
+    category: "Plantas",
   },
 ];

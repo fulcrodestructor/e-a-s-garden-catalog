@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, Upload, X } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import type { Product } from "@/data/products";
+import { categories, type Product } from "@/data/products";
 
 interface AddProductDialogProps {
   onAdd: (product: Product) => void;
@@ -16,6 +17,7 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [category, setCategory] = useState(categories[0]);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -49,12 +51,14 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
       price: parseFloat(price),
       stock: parseInt(stock),
       image: imagePreview || "/placeholder.svg",
+      category,
     };
     onAdd(product);
     setOpen(false);
     setName("");
     setPrice("");
     setStock("");
+    setCategory(categories[0]);
     setImagePreview(null);
     toast({ title: "Producto agregado", description: `${name} fue agregado al catálogo.` });
   };
@@ -82,9 +86,22 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
               <Input id="price" type="number" min="0" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0.00" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="stock">Stock</Label>
+              <Label htmlFor="stock">Disponibles</Label>
               <Input id="stock" type="number" min="0" value={stock} onChange={(e) => setStock(e.target.value)} placeholder="0" />
             </div>
+          </div>
+          <div className="space-y-2">
+            <Label>Categoría</Label>
+            <Select value={category} onValueChange={setCategory}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((c) => (
+                  <SelectItem key={c} value={c}>{c}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div className="space-y-2">
             <Label>Imagen</Label>

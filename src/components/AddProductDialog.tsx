@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus } from "lucide-react";
+import { Plus, Upload, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { Product } from "@/data/products";
 
@@ -16,8 +16,26 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [dragActive, setDragActive] = useState(false);
   const { toast } = useToast();
+
+  const handleFile = (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      toast({ title: "Error", description: "Solo se permiten archivos de imagen.", variant: "destructive" });
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => setImagePreview(e.target?.result as string);
+    reader.readAsDataURL(file);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragActive(false);
+    if (e.dataTransfer.files?.[0]) handleFile(e.dataTransfer.files[0]);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,14 +48,14 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
       name,
       price: parseFloat(price),
       stock: parseInt(stock),
-      image: imageUrl || "/placeholder.svg",
+      image: imagePreview || "/placeholder.svg",
     };
     onAdd(product);
     setOpen(false);
     setName("");
     setPrice("");
     setStock("");
-    setImageUrl("");
+    setImagePreview(null);
     toast({ title: "Producto agregado", description: `${name} fue agregado al catálogo.` });
   };
 
@@ -69,8 +87,39 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="imageUrl">URL de imagen</Label>
-            <Input id="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="https://..." />
+            <Label>Imagen</Label>
+            <div
+              className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors ${dragActive ? 'border-primary bg-primary/10' : 'border-border hover:border-primary/50'}`}
+              onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
+              onDragLeave={() => setDragActive(false)}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              {imagePreview ? (
+                <div className="relative inline-block">
+                  <img src={imagePreview} alt="Preview" className="h-32 w-32 object-cover rounded-md mx-auto" />
+                  <button
+                    type="button"
+                    className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-1"
+                    onClick={(e) => { e.stopPropagation(); setImagePreview(null); }}
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center gap-2 text-muted-foreground py-4">
+                  <Upload className="h-8 w-8" />
+                  <p className="text-sm">Arrastra una imagen o haz clic para seleccionar</p>
+                </div>
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
+              />
+            </div>
           </div>
           <Button type="submit" className="w-full">Agregar</Button>
         </form>

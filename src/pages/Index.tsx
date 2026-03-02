@@ -23,11 +23,15 @@ const Index = () => {
     setProducts((prev) => prev.filter((p) => p.id !== id));
   };
 
+  const handleUpdate = (updated: Product) => {
+    setProducts((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <header className="container mx-auto px-4 pt-4 pb-2">
+        <div className="flex items-center justify-between">
           <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">
             Vivero Parque Eca do Queiros
           </h1>
@@ -37,38 +41,34 @@ const Index = () => {
             onLogout={() => setIsAdmin(false)}
           />
         </div>
+        <a
+          href="https://maps.app.goo.gl/nnGeqrLx9f8CwiS48"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mt-1"
+        >
+          <MapPin className="h-4 w-4 text-primary" />
+          <span className="text-sm">Ver ubicación en Google Maps</span>
+        </a>
       </header>
 
-      {/* Location + Search */}
+      <div className="border-b border-border" />
+
+      {/* Search */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <a
-            href="https://maps.app.goo.gl/NARCKtqfFrqeKoc37"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <MapPin className="h-4 w-4 text-primary" />
-            <span className="text-sm">Ver ubicación en Google Maps</span>
-          </a>
-          <div className="relative w-full sm:w-72">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          {isAdmin && <AddProductDialog onAdd={handleAdd} />}
+          <div className={`relative w-full ${isAdmin ? 'sm:w-72' : 'sm:w-96'}`}>
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               placeholder="Buscar planta..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9"
+              className="pl-10 text-lg font-bold placeholder:text-lg placeholder:font-bold"
             />
           </div>
         </div>
       </div>
-
-      {/* Admin toolbar */}
-      {isAdmin && (
-        <div className="container mx-auto px-4 pb-2">
-          <AddProductDialog onAdd={handleAdd} />
-        </div>
-      )}
 
       {/* Catalog */}
       <main className="container mx-auto px-4 py-6">
@@ -84,6 +84,7 @@ const Index = () => {
                 product={product}
                 isAdmin={isAdmin}
                 onDelete={handleDelete}
+                onUpdate={handleUpdate}
               />
             ))}
           </div>

@@ -54,12 +54,12 @@ const ProductCard = ({ product, isAdmin, onDelete, onUpdate }: ProductCardProps)
           )}
         </div>
         <div className="p-4 space-y-1">
-          <h3 className="font-display text-lg text-foreground">{product.name}</h3>
+          <h3 className="font-display text-2xl text-foreground">{product.name}</h3>
           <p className="text-primary font-semibold text-xl">
             ${product.price.toFixed(2)}
           </p>
-          <p className="text-muted-foreground text-sm">
-            Stock: {product.stock} unidades
+          <p className="text-muted-foreground text-base">
+            Disponibles: {product.stock} unidades
           </p>
           {isAdmin && (
             <div className="flex gap-2 mt-2">
@@ -97,7 +97,7 @@ const ProductCard = ({ product, isAdmin, onDelete, onUpdate }: ProductCardProps)
                 <Input id={`edit-price-${product.id}`} type="number" min="0" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor={`edit-stock-${product.id}`}>Stock</Label>
+                <Label htmlFor={`edit-stock-${product.id}`}>Disponibles</Label>
                 <Input id={`edit-stock-${product.id}`} type="number" min="0" value={stock} onChange={(e) => setStock(e.target.value)} />
               </div>
             </div>

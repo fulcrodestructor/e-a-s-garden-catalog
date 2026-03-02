@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, MapPin } from "lucide-react";
+import { Search, MapPin, Instagram } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import LoginDialog from "@/components/LoginDialog";
 import AddProductDialog from "@/components/AddProductDialog";
@@ -41,15 +41,26 @@ const Index = () => {
             onLogout={() => setIsAdmin(false)}
           />
         </div>
-        <a
-          href="https://maps.app.goo.gl/nnGeqrLx9f8CwiS48"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mt-1"
-        >
-          <MapPin className="h-4 w-4 text-primary" />
-          <span className="text-sm">Ver ubicación en Google Maps</span>
-        </a>
+        <div className="flex items-center gap-4 mt-1">
+          <a
+            href="https://maps.app.goo.gl/nnGeqrLx9f8CwiS48"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+          >
+            <MapPin className="h-4 w-4 text-primary" />
+            <span className="text-sm">Ubicación</span>
+          </a>
+          <a
+            href="https://www.instagram.com/eca_do_queiros/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Instagram className="h-4 w-4 text-primary" />
+            <span className="text-sm">Instagram</span>
+          </a>
+        </div>
       </header>
 
       <div className="border-b border-border" />
@@ -72,23 +83,30 @@ const Index = () => {
 
       {/* Catalog */}
       <main className="container mx-auto px-4 py-6">
-        {filtered.length === 0 ? (
-          <p className="text-center text-muted-foreground py-12">
-            No se encontraron plantas.
-          </p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filtered.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                isAdmin={isAdmin}
-                onDelete={handleDelete}
-                onUpdate={handleUpdate}
-              />
-            ))}
-          </div>
-        )}
+        {["Plantas", "Árboles"].map((category) => {
+          const categoryProducts = filtered.filter((p) => p.category === category);
+          if (categoryProducts.length === 0 && search) return null;
+          return (
+            <section key={category} className="mb-10">
+              <h2 className="font-display text-2xl font-semibold text-foreground mb-4">{category}</h2>
+              {categoryProducts.length === 0 ? (
+                <p className="text-muted-foreground">No hay productos en esta categoría.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {categoryProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      isAdmin={isAdmin}
+                      onDelete={handleDelete}
+                      onUpdate={handleUpdate}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
+          );
+        })}
       </main>
     </div>
   );

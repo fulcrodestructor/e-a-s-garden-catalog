@@ -1,6 +1,9 @@
 import crownOfThorns from "@/assets/crown-of-thorns.jpg";
 import cactus from "@/assets/cactus.jpg";
 import succulent from "@/assets/succulent.jpg";
+import oliveTree from "@/assets/olive-tree.jpg";
+import lemonTree from "@/assets/lemon-tree.jpg";
+import orangeTree from "@/assets/orange-tree.jpg";
 
 export interface Product {
   id: string;
@@ -37,5 +40,29 @@ export const initialProducts: Product[] = [
     stock: 30,
     image: succulent,
     category: "Plantas",
+  },
+  {
+    id: "4",
+    name: "Olivo",
+    price: 350,
+    stock: 8,
+    image: oliveTree,
+    category: "Árboles",
+  },
+  {
+    id: "5",
+    name: "Limonero",
+    price: 280,
+    stock: 15,
+    image: lemonTree,
+    category: "Árboles",
+  },
+  {
+    id: "6",
+    name: "Naranjo",
+    price: 300,
+    stock: 10,
+    image: orangeTree,
+    category: "Árboles",
   },
 ];

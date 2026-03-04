@@ -82,7 +82,7 @@ const Index = () => {
               href="https://maps.app.goo.gl/nnGeqrLx9f8CwiS48"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 font-semibold text-lg hover:opacity-80 transition-opacity"
+              className="flex items-center gap-2 font-semibold text-lg hover:opacity-80 transition-opacity bg-white rounded-lg px-4 py-2"
               style={{ color: "#4285f4" }}
             >
               <GoogleMapsIcon />
@@ -92,15 +92,17 @@ const Index = () => {
               href="https://www.instagram.com/eca_do_queiros/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 font-semibold text-lg hover:opacity-80 transition-opacity"
+              className="flex items-center gap-2 font-semibold text-lg hover:opacity-80 transition-opacity bg-white rounded-lg px-4 py-2"
               style={{
-                background: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                background: "white",
               }}
             >
               <InstagramIcon />
-              <span>Instagram</span>
+              <span style={{
+                background: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}>Instagram</span>
             </a>
           </div>
 
@@ -112,7 +114,7 @@ const Index = () => {
                 placeholder="Buscar producto"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-10 text-lg font-bold placeholder:text-lg placeholder:font-bold"
+                className="pl-10 text-lg font-bold placeholder:text-lg placeholder:font-bold text-black border-2 border-foreground/40"
               />
             </div>
           </div>

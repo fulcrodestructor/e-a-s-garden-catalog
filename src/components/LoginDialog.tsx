@@ -54,14 +54,14 @@ const LoginDialog = ({ isAdmin, onLogin, onLogout }: LoginDialogProps) => {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 pt-2">
           <div className="space-y-2">
-            <Label htmlFor="user">Usuario</Label>
-            <Input id="user" value={user} onChange={(e) => setUser(e.target.value)} placeholder="Usuario" />
+            <Label htmlFor="user" className="text-black">Usuario</Label>
+            <Input id="user" value={user} onChange={(e) => setUser(e.target.value)} placeholder="Usuario" className="bg-white text-black placeholder:text-black/50" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Contraseña</Label>
-            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" />
+            <Label htmlFor="password" className="text-black">Contraseña</Label>
+            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="bg-white text-black placeholder:text-black/50" />
           </div>
-          <Button type="submit" className="w-full">Entrar</Button>
+          <Button type="submit" className="w-full bg-blue-800 hover:bg-blue-900 text-white">Entrar</Button>
         </form>
       </DialogContent>
     </Dialog>

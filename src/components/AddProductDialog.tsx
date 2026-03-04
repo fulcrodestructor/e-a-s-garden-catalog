@@ -66,7 +66,7 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="gap-2">
+        <Button className="gap-2 bg-yellow-400 hover:bg-yellow-500 text-black">
           <Plus className="h-4 w-4" />
           Agregar Producto
         </Button>
@@ -77,17 +77,17 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 pt-2">
           <div className="space-y-2">
-            <Label htmlFor="name">Nombre</Label>
-            <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre de la planta" />
+            <Label htmlFor="name" className="text-black">Nombre</Label>
+            <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre de la planta" className="bg-white text-black placeholder:text-black/50" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="price">Precio ($)</Label>
-              <Input id="price" type="number" min="0" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0.00" />
+              <Label htmlFor="price" className="text-black">Precio ($)</Label>
+              <Input id="price" type="number" min="0" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0.00" className="bg-white text-black placeholder:text-black/50" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="stock">Disponibles</Label>
-              <Input id="stock" type="number" min="0" value={stock} onChange={(e) => setStock(e.target.value)} placeholder="0" />
+              <Label htmlFor="stock" className="text-black">Disponibles</Label>
+              <Input id="stock" type="number" min="0" value={stock} onChange={(e) => setStock(e.target.value)} placeholder="0" className="bg-white text-black placeholder:text-black/50" />
             </div>
           </div>
           <div className="space-y-2">
@@ -138,7 +138,7 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
               />
             </div>
           </div>
-          <Button type="submit" className="w-full">Agregar</Button>
+          <Button type="submit" className="w-full bg-blue-800 hover:bg-blue-900 text-white">Agregar</Button>
         </form>
       </DialogContent>
     </Dialog>

@@ -58,7 +58,7 @@ const ProductCard = ({ product, isAdmin, onDelete, onUpdate }: ProductCardProps)
           <p className="text-primary font-semibold text-xl">
             ${product.price.toFixed(2)}
           </p>
-          <p className="text-muted-foreground text-base">
+          <p className="text-muted-foreground text-lg">
             Disponibles: {product.stock} unidades
           </p>
           {isAdmin && (
@@ -84,24 +84,24 @@ const ProductCard = ({ product, isAdmin, onDelete, onUpdate }: ProductCardProps)
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="font-display">Editar Producto</DialogTitle>
+            <DialogTitle className="font-display text-black">Editar Producto</DialogTitle>
           </DialogHeader>
           <form onSubmit={handleSave} className="space-y-4 pt-2">
             <div className="space-y-2">
-              <Label htmlFor={`edit-name-${product.id}`}>Nombre</Label>
-              <Input id={`edit-name-${product.id}`} value={name} onChange={(e) => setName(e.target.value)} />
+              <Label htmlFor={`edit-name-${product.id}`} className="text-black">Nombre</Label>
+              <Input id={`edit-name-${product.id}`} value={name} onChange={(e) => setName(e.target.value)} className="bg-white text-black placeholder:text-black/50" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor={`edit-price-${product.id}`}>Precio ($)</Label>
-                <Input id={`edit-price-${product.id}`} type="number" min="0" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} />
+                <Label htmlFor={`edit-price-${product.id}`} className="text-black">Precio ($)</Label>
+                <Input id={`edit-price-${product.id}`} type="number" min="0" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} className="bg-white text-black placeholder:text-black/50" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor={`edit-stock-${product.id}`}>Disponibles</Label>
-                <Input id={`edit-stock-${product.id}`} type="number" min="0" value={stock} onChange={(e) => setStock(e.target.value)} />
+                <Label htmlFor={`edit-stock-${product.id}`} className="text-black">Disponibles</Label>
+                <Input id={`edit-stock-${product.id}`} type="number" min="0" value={stock} onChange={(e) => setStock(e.target.value)} className="bg-white text-black placeholder:text-black/50" />
               </div>
             </div>
-            <Button type="submit" className="w-full">Guardar cambios</Button>
+            <Button type="submit" className="w-full bg-blue-800 hover:bg-blue-900 text-white">Guardar cambios</Button>
           </form>
         </DialogContent>
       </Dialog>

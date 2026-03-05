@@ -93,7 +93,7 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
           <div className="space-y-2">
             <Label>Categoría</Label>
             <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger>
+              <SelectTrigger className="bg-white text-black">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -106,7 +106,7 @@ const AddProductDialog = ({ onAdd }: AddProductDialogProps) => {
           <div className="space-y-2">
             <Label>Imagen</Label>
             <div
-              className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors ${dragActive ? 'border-primary bg-primary/10' : 'border-border hover:border-primary/50'}`}
+              className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors bg-white ${dragActive ? 'border-primary bg-primary/10' : 'border-border hover:border-primary/50'}`}
               onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
               onDragLeave={() => setDragActive(false)}
               onDrop={handleDrop}

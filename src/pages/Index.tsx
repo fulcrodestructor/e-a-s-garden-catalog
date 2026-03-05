@@ -5,16 +5,7 @@ import LoginDialog from "@/components/LoginDialog";
 import AddProductDialog from "@/components/AddProductDialog";
 import ProductCard from "@/components/ProductCard";
 import { initialProducts, type Product } from "@/data/products";
-
-const GoogleMapsIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92.3 132.3" className="h-6 w-6 flex-shrink-0">
-    <path fill="#1a73e8" d="M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z"/>
-    <path fill="#ea4335" d="M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-33.8L10.8 16.5z"/>
-    <path fill="#4285f4" d="M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.6 27.5-34.3-5.6-10.8-15.3-19-27-22.7L32.6 34.8c3.3-3.8 8.1-6.3 13.6-6.3"/>
-    <path fill="#fbbc04" d="M46.2 63.8c-9.8 0-17.7-7.9-17.7-17.7 0-4.3 1.5-8.3 4.1-11.3l-28 33.8c4.3 10 10.6 18.2 17.1 27.1l24.5-31.9z"/>
-    <path fill="#34a853" d="M46.2 132.3c5.6-9.7 25.8-30.2 33.5-48 3.4-7.8 5.4-16.1 5.4-24.3h0c0-5.3-1-10.3-2.8-14.9L46.2 132.3z"/>
-  </svg>
-);
+import googleMapsIcon from "@/assets/google-maps-icon.png";
 
 const InstagramIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-6 w-6 flex-shrink-0">
@@ -85,7 +76,7 @@ const Index = () => {
               className="flex items-center gap-2 font-semibold text-lg hover:opacity-80 transition-opacity bg-black rounded-lg px-4 py-2"
               style={{ color: "#4285f4" }}
             >
-              <GoogleMapsIcon />
+              <img src={googleMapsIcon} alt="Google Maps" className="h-6 w-6 flex-shrink-0" />
               <span>Ubicación</span>
             </a>
             <a
@@ -114,7 +105,7 @@ const Index = () => {
                 placeholder="Buscar producto"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-10 text-lg font-bold placeholder:text-lg placeholder:font-bold text-black border-2 border-foreground/40"
+                className="pl-10 text-lg font-bold placeholder:text-lg placeholder:font-bold placeholder:text-black text-black border-2 border-foreground/40"
               />
             </div>
           </div>

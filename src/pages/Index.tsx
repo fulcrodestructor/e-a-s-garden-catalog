@@ -5,19 +5,13 @@ import LoginDialog from "@/components/LoginDialog";
 import AddProductDialog from "@/components/AddProductDialog";
 import ProductCard from "@/components/ProductCard";
 import { initialProducts, type Product } from "@/data/products";
-const GoogleMapsPin = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 24" className="h-6 w-auto flex-shrink-0">
-    <path d="M8 0C3.58 0 0 3.58 0 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8z" fill="#ea4335"/>
-    <path d="M8 0C3.58 0 0 3.58 0 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8z" fill="url(#gm-grad)"/>
-    <defs>
-      <linearGradient id="gm-grad" x1="0" y1="0" x2="16" y2="24" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#4285f4"/>
-        <stop offset="30%" stopColor="#34a853"/>
-        <stop offset="60%" stopColor="#fbbc04"/>
-        <stop offset="100%" stopColor="#ea4335"/>
-      </linearGradient>
-    </defs>
-    <circle cx="8" cy="8" r="3" fill="#1a0dab"/>
+const LocationPin = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" className="h-6 w-auto flex-shrink-0">
+    <path
+      d="M12 0C5.37 0 0 5.37 0 12c0 9 12 20 12 20s12-11 12-20c0-6.63-5.37-12-12-12z"
+      fill="#ef4444"
+    />
+    <circle cx="12" cy="12" r="5" fill="white" />
   </svg>
 );
 
@@ -88,10 +82,9 @@ const Index = () => {
               href="https://maps.app.goo.gl/nnGeqrLx9f8CwiS48"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 font-semibold text-lg hover:opacity-80 transition-opacity bg-black rounded-lg px-4 py-2"
-              style={{ color: "#4285f4" }}
+              className="flex items-center gap-2 font-semibold text-lg hover:opacity-80 transition-opacity bg-black rounded-lg px-4 py-2 text-white"
             >
-              <GoogleMapsPin />
+              <LocationPin />
               <span>Ubicación</span>
             </a>
             <a
@@ -115,12 +108,12 @@ const Index = () => {
           <div className="flex items-center gap-3">
             {isAdmin && <AddProductDialog onAdd={handleAdd} />}
             <div className="relative w-full sm:w-72">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/60" />
               <Input
                 placeholder="Buscar producto"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-10 text-base font-semibold placeholder:text-base placeholder:font-semibold placeholder:text-gray-500 text-black border-2 border-foreground/40"
+                className="pl-9 text-sm font-medium placeholder:text-sm placeholder:font-medium placeholder:text-foreground/60 text-foreground border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9"
               />
             </div>
           </div>

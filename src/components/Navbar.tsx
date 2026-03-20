@@ -57,30 +57,26 @@ const Navbar = () => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#2d6a4f] shadow-lg">
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-          {/* Left: external links */}
-          <div className="flex items-center gap-2">
+          {/* Center: all nav items including external links (desktop) */}
+          <div className="hidden md:flex items-center gap-1 mx-auto">
             <a
               href="https://maps.app.goo.gl/nnGeqrLx9f8CwiS48"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
-              aria-label="Ubicación"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-md text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-colors"
             >
               <MapPin className="h-[1.875rem] w-[1.875rem] text-red-400" />
+              <span>Ubicación</span>
             </a>
             <a
               href="https://www.instagram.com/eca_do_queiros/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
-              aria-label="Instagram"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-md text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-colors"
             >
               <InstagramIcon />
+              <span>Instagram</span>
             </a>
-          </div>
-
-          {/* Center: nav links (desktop) */}
-          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
               const active = location.pathname === link.to;
               return (
@@ -134,6 +130,26 @@ const Navbar = () => {
         {/* Mobile dropdown */}
         {mobileOpen && (
           <div className="md:hidden border-t border-white/10 bg-[#2d6a4f] pb-2">
+            <a
+              href="https://maps.app.goo.gl/nnGeqrLx9f8CwiS48"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+            >
+              <MapPin className="h-5 w-5 text-red-400" />
+              Ubicación
+            </a>
+            <a
+              href="https://www.instagram.com/eca_do_queiros/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+            >
+              <InstagramIcon />
+              Instagram
+            </a>
             {navLinks.map((link) => {
               const active = location.pathname === link.to;
               return (

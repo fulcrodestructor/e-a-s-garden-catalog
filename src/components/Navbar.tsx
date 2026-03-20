@@ -9,7 +9,7 @@ import { useAdmin } from "@/contexts/AdminContext";
 import { useToast } from "@/hooks/use-toast";
 
 const InstagramIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 flex-shrink-0">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-[1.875rem] w-[1.875rem] flex-shrink-0">
     <defs>
       <linearGradient id="nav-ig" x1="0%" y1="100%" x2="100%" y2="0%">
         <stop offset="0%" stopColor="#feda75"/>
@@ -66,7 +66,7 @@ const Navbar = () => {
               className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
               aria-label="Ubicación"
             >
-              <MapPin className="h-5 w-5 text-red-400" />
+              <MapPin className="h-[1.875rem] w-[1.875rem] text-red-400" />
             </a>
             <a
               href="https://www.instagram.com/eca_do_queiros/"
